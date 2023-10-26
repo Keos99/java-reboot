@@ -20,7 +20,6 @@ public class DataStorageFileImpl implements DataStorage {
             writer = new BufferedWriter(new FileWriter(file));
             writer.write("Количество строк: " + lineCount + " Количество пробелов: " + spaceCount +
                     " Самая длинная строка:\n" + line);
-            writer.newLine();
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
