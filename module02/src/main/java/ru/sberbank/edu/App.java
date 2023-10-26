@@ -4,18 +4,27 @@ import java.io.File;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main(String[] args) {
+        String fileForSave = "module02/src/main/resources/text2.txt";
+        String fileForRead = "module02/src/main/resources/text.txt";
+
         FileHandler fileHandler = new FileHandler();
         Statistic statistics = new StatisticsImpl();
-        File file = new File("module02/src/main/resources/text.txt");
+        DataStorage storage = new DataStorageFileImpl(fileForSave);
+        File file = new File(fileForRead);
 
-        System.out.println("Количество строк: " + statistics.getLineCount(fileHandler.readFile(file)));
-        System.out.println("Количество пробелов: " + statistics.getSpaceCount(fileHandler.readFile(file)));
-        System.out.println("Самая длинная строка:\n" + statistics.getLongestLine(fileHandler.readFile(file)));
+        int lineCount = statistics.getLineCount(fileHandler.readFile(file));
+        int spaceCount = statistics.getSpaceCount(fileHandler.readFile(file));
+        String line = statistics.getLongestLine(fileHandler.readFile(file));
+
+        System.out.println("Количество строк: " + lineCount + " Количество пробелов: " + spaceCount +
+                "Самая длинная строка:\n" + line);
+
+        storage.save(lineCount, spaceCount, line);
+
+        storage = new DataStorageBDImpl();
+        storage.save(lineCount, spaceCount, line);
     }
 }

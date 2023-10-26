@@ -6,6 +6,8 @@ import java.io.Reader;
 public interface Statistic {
 
     int getLineCount(Reader reader);
+
     int getSpaceCount(Reader reader);
+
     String getLongestLine(Reader reader);
 }

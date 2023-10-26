@@ -52,6 +52,7 @@ public class StatisticsImpl implements Statistic {
 
     /**
      * Поиск самой длинной строки.
+     *
      * @param reader прочитанный файл
      * @return возвращает самую длинную строку.
      */
