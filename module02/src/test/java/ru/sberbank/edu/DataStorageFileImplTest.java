@@ -13,18 +13,13 @@ class DataStorageFileImplTest {
     @Test
     void save() throws IOException {
         String fileForSave = "src/test/resources/text2.txt";
-        File file = new File(fileForSave);
+        String expectedData = "Количество строк: 1 Количество пробелов: 2 Самая длинная строка:\nЭто строка";
 
-        // Вызываем метод save()
+        File file = new File(fileForSave);
         DataStorageFileImpl storage = new DataStorageFileImpl(fileForSave);
         storage.save(1, 2, "Это строка");
-
-        // Проверяем, что данные были записаны в файл
-        String expectedData = "Количество строк: 1 Количество пробелов: 2 Самая длинная строка:\nЭто строка";
         String actualData = FileUtils.readFileToString(file, "UTF-8");
         assertEquals(expectedData, actualData);
-
-        // Удаляем файл
         file.delete();
     }
 }

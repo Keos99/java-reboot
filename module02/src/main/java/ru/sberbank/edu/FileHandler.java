@@ -18,7 +18,7 @@ public class FileHandler {
     public Reader readFile(File file) {
         try {
             input = new BufferedReader(new java.io.FileReader(file));
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return input;
