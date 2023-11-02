@@ -22,6 +22,8 @@ public class CustomArrayImpl<T> implements CustomArray<T> {
      * @param startSize размер массива.
      */
     public CustomArrayImpl(int startSize) {
+        int size = startSize;
+        if (startSize <= 0) size = startСapacity;
         elements = new Object[startSize];
     }
 
@@ -236,7 +238,9 @@ public class CustomArrayImpl<T> implements CustomArray<T> {
      */
     @Override
     public void ensureCapacity(int newElementsCount) {
-        elements = Arrays.copyOf(elements, newElementsCount);
+        int elementsCount = newElementsCount;
+        if (newElementsCount <= 0) elementsCount = 1;
+        elements = Arrays.copyOf(elements, elementsCount);
     }
 
     /**
