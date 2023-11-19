@@ -41,6 +41,7 @@ public class GeoPosition {
         this.latitude = toRadians(toDoubleRegular(latitudeGradus));
         this.longitude = toRadians(toDoubleRegular(longitudeGradus));
     }
+
     /**
      * Получение значения широты в радианах
      *
@@ -101,8 +102,10 @@ public class GeoPosition {
      * @param value строковое значение координат в градусах
      * @return Double значеник координат в градусах
      * @throws IllegalArgumentException если формат сообшения не совпадает с патерном
+     * @throws NullPointerException     если строка пуста, содержит только пробелы или содержит null
      */
     private static double toDoubleRegular(String value) {
+        if (value == null || value.isBlank() || value.isEmpty()) throw new NullPointerException();
         if (value.length() < 4) return Integer.parseInt(value);
         Pattern pattern = Pattern.compile(
                 "(\\d+)\\((\\d{2})'(\\d{2})''\\)");
