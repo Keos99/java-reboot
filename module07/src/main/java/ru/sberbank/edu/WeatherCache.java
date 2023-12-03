@@ -8,7 +8,7 @@ public class WeatherCache {
 
     private final Map<String, WeatherInfo> cache = new HashMap<>();
     private final WeatherProvider weatherProvider;
-    private final int cacheExpireTimeInMinutes = 5;
+    private int cacheExpireTimeInMinutes = 5;
 
     /**
      * Constructor.
@@ -17,6 +17,10 @@ public class WeatherCache {
      */
     public WeatherCache(WeatherProvider weatherProvider) {
         this.weatherProvider = weatherProvider;
+    }
+
+    public void setCacheExpireTimeInMinutes(int timeInMinutes){
+        cacheExpireTimeInMinutes = timeInMinutes;
     }
 
     /**
@@ -29,8 +33,8 @@ public class WeatherCache {
      * @return actual weather info
      */
     public synchronized WeatherInfo getWeatherInfo(String city) {
-        if (cache.containsKey(city)){
-            if (!isExpired(cache.get(city).getExpiryTime())) {
+        if (cache.containsKey(city)) {
+            if (isExpired(cache.get(city).getExpiryTime())) {
                 removeWeatherInfo(city);
                 return updateСacheAndGet(city);
             }
@@ -46,10 +50,14 @@ public class WeatherCache {
      * @param city The city for which to update the weather info cache.
      * @return The updated weather info.
      */
-    private WeatherInfo updateСacheAndGet(String city){
+    private WeatherInfo updateСacheAndGet(String city) {
         cache.put(city, weatherProvider.get(city));
-        if (cache.containsKey(city)) cache.get(city).setExpiryTime(LocalDateTime.now()
-                .plusMinutes(cacheExpireTimeInMinutes));
+        if (cache.get(city) != null && cache.containsKey(city)) {
+            cache.get(city).setExpiryTime(LocalDateTime.now()
+                    .plusMinutes(cacheExpireTimeInMinutes));
+        } else {
+            return null;
+        }
         return cache.get(city);
     }
 

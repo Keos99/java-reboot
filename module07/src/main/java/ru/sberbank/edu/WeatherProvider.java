@@ -3,6 +3,7 @@ package ru.sberbank.edu;
 import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import ru.sberbank.edu.model.WeatherData;
 
@@ -28,10 +29,13 @@ public class WeatherProvider {
      */
     public WeatherInfo get(String city) {
         WeatherInfo weatherInfo = null;
-        ResponseEntity<String> response = restTemplate.getForEntity(getUrl(city, apiKey), String.class);
-        if (response.getStatusCode() == HttpStatus.OK){
-            weatherInfo = mapWeaterInfo(gson.fromJson(response.getBody(), WeatherData.class));
+        ResponseEntity<String> response;
+        try {
+            response = restTemplate.getForEntity(getUrl(city, apiKey), String.class);
+        } catch (HttpClientErrorException e){
+            return null;
         }
+            weatherInfo = mapWeaterInfo(gson.fromJson(response.getBody(), WeatherData.class));
         return weatherInfo;
     }
 
@@ -44,11 +48,11 @@ public class WeatherProvider {
     private WeatherInfo mapWeaterInfo (WeatherData data){
         WeatherInfo info = new WeatherInfo();
         info.setCity(data.name);
-        info.setDescription(data.getWeather().get(1).getDescription());
+        info.setDescription(data.getWeather().get(0).getDescription());
         info.setPressure(data.getMain().getPressure());
         info.setTemperature(data.getMain().getTemp());
         info.setFeelsLikeTemperature(data.getMain().getFeels_like());
-        info.setShortDescription(data.getWeather().get(1).getDescription());
+        info.setShortDescription(data.getWeather().get(0).getDescription());
         info.setWindSpeed(data.getWind().getSpeed());
         return info;
     }
