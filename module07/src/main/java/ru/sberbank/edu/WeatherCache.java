@@ -8,6 +8,7 @@ public class WeatherCache {
 
     private final Map<String, WeatherInfo> cache = new HashMap<>();
     private final WeatherProvider weatherProvider;
+    private final int cacheExpireTimeInMinutes = 5;
 
     /**
      * Constructor.
@@ -47,6 +48,8 @@ public class WeatherCache {
      */
     private WeatherInfo updateСacheAndGet(String city){
         cache.put(city, weatherProvider.get(city));
+        if (cache.containsKey(city)) cache.get(city).setExpiryTime(LocalDateTime.now()
+                .plusMinutes(cacheExpireTimeInMinutes));
         return cache.get(city);
     }
 
