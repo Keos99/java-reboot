@@ -10,11 +10,11 @@ public class RequestHandler {
     @Value("${min.sum}")
     private int minSum;
 
-    public boolean isDataValid(FinanceRQ rq){
+    public boolean isDataValid(FinanceRQ rq) {
         return (rq != null && rq.getPercentage() >= 0 && rq.getYears() >= 0 && rq.getSum() >= 0);
     }
 
-    public boolean isDepositSumValid(FinanceRQ rq){
+    public boolean isDepositSumValid(FinanceRQ rq) {
         return rq.getSum() >= minSum;
     }
 }
