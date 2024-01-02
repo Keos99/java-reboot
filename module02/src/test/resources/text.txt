@@ -1,0 +1,11 @@
+As explained earlier, prior to JDK 8, an interface could not define any
+implementation whatsoever. This meant that for all previous versions of Java,
+the methods specified by an interface were abstract, containing nobody. This is
+the traditional form of an interface and is the type of interface that the
+preceding discussions have used. The release of JDK 8 changed this by adding a
+new capability to interface called the default method. A default method lets
+you define a default implementation for an interface method. In other words, by
+use of a default method, it is possible for an interface method to provide a
+body, rather than being abstract. During its development, the default method
+was also referred to as an extension method, and you will likely see both terms
+used.

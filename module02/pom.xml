@@ -16,4 +16,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>org-apache-commons-io</artifactId>
+            <version>RELEASE113</version>
+        </dependency>
+    </dependencies>
+
 </project>

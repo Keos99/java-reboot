@@ -1,11 +1,13 @@
 package ru.sberbank.edu;
 
+import java.io.Reader;
+
 // интерфейс можно менять
 public interface Statistic {
 
-    int getLineCount();
-    int getSpaceCount();
-    String getLongestLine();
-    void save(int lineCount, int spaceCount, String line);
+    int getLineCount(Reader reader);
 
+    int getSpaceCount(Reader reader);
+
+    String getLongestLine(Reader reader);
 }
