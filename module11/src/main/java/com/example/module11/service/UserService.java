@@ -26,22 +26,25 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void editUser(User user) {
+    public boolean editUser(User user) {
         userRepository.findById(user.getId()).orElseThrow(() -> new NoSuchElementException("Пользователь не найден"));
         userRepository.save(user);
+        return true;
     }
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         if (userRepository.findById(user.getId()).isPresent()){
             throw new IllegalArgumentException("Пользователь с данным id уже существует");
         }
         userRepository.saveAll(Arrays.asList(
                 user
         ));
+        return true;
     }
 
-    public void deleteUser(User user) {
+    public boolean deleteUser(User user) {
         userRepository.findById(user.getId()).orElseThrow(() -> new NoSuchElementException("Пользователь не найден"));
         userRepository.deleteById(user.getId());
+        return true;
     }
 }
