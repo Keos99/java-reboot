@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 public class UserController {
@@ -29,21 +30,33 @@ public class UserController {
     @PostMapping("/edit/user")
     public Response editUser(@RequestBody User user){
         logger.info(user.toString());
-        userService.editUser(user);
-        return new Response(true);
+        try {
+            userService.editUser(user);
+        } catch (NoSuchElementException e){
+            return new Response(false, e.getMessage());
+        }
+        return new Response(true,"Пользователь отредактирован");
     }
 
     @PostMapping("/add/user")
     public Response addUser(@RequestBody User user){
         logger.info(user.toString());
-        userService.addUser(user);
-        return new Response(true);
+        try {
+            userService.addUser(user);
+        } catch (IllegalArgumentException e){
+            return new Response(false, e.getMessage());
+        }
+        return new Response(true,"Пользователь добавлен");
     }
 
     @PostMapping("/delete/user")
     public Response deleteUser(@RequestBody User user){
         logger.info(user.toString());
-        userService.deleteUser(user);
-        return new Response(true);
+        try {
+            userService.deleteUser(user);
+        } catch (NoSuchElementException e){
+            return new Response(false, e.getMessage());
+        }
+        return new Response(true,"Пользователь удален");
     }
 }
