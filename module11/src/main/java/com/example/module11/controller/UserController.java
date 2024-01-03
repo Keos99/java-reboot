@@ -30,6 +30,20 @@ public class UserController {
     public Response editUser(@RequestBody User user){
         logger.info(user.toString());
         userService.editUser(user);
-        return null;
+        return new Response(true);
+    }
+
+    @PostMapping("/add/user")
+    public Response addUser(@RequestBody User user){
+        logger.info(user.toString());
+        userService.addUser(user);
+        return new Response(true);
+    }
+
+    @PostMapping("/delete/user")
+    public Response deleteUser(@RequestBody User user){
+        logger.info(user.toString());
+        userService.deleteUser(user);
+        return new Response(true);
     }
 }

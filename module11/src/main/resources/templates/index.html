@@ -36,9 +36,9 @@
     let buttonedit = document.getElementById("edit");
     let buttondelete = document.getElementById("delete");
 
-    buttonadd.addEventListener("click", () => editUser());
+    buttonadd.addEventListener("click", () => addUser());
     buttonedit.addEventListener("click", () => editUser());
-    buttondelete.addEventListener("click", () => editUser());
+    buttondelete.addEventListener("click", () => deleteUser());
 
     window.addEventListener('load', loadUserInfo)
 
@@ -71,10 +71,6 @@
         mapuser.set('name', inputname.value);
         mapuser.set('age', inputage.value);
 
-        var obj = Object.fromEntries(mapuser);
-        var jsonString = JSON.stringify(obj);
-        alert(jsonString);
-
         return Object.fromEntries(mapuser);
     }
 
@@ -88,7 +84,35 @@
         }).then(function (responce) {
                 return responce.text();
         }).then(function (data) {
-                alert(data);
+                console.log(data);
+        })
+    }
+
+    function addUser() {
+        fetch("/add/user", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+                },
+            body: JSON.stringify(formatvalues())
+        }).then(function (responce) {
+                return responce.text();
+        }).then(function (data) {
+                console.log(data);
+        })
+    }
+
+    function deleteUser() {
+        fetch("/delete/user", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+                },
+            body: JSON.stringify(formatvalues())
+        }).then(function (responce) {
+                return responce.text();
+        }).then(function (data) {
+                console.log(data);
         })
     }
 
