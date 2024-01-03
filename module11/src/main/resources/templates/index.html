@@ -36,9 +36,9 @@
     let buttonedit = document.getElementById("edit");
     let buttondelete = document.getElementById("delete");
 
-    buttonadd.addEventListener("click", () => addUser());
-    buttonedit.addEventListener("click", () => editUser());
-    buttondelete.addEventListener("click", () => deleteUser());
+    buttonadd.addEventListener("click", () => sendRQ("/add/user"));
+    buttonedit.addEventListener("click", () => sendRQ("/edit/user"));
+    buttondelete.addEventListener("click", () => sendRQ("/delete/user"));
 
     window.addEventListener('load', loadUserInfo)
 
@@ -74,36 +74,8 @@
         return Object.fromEntries(mapuser);
     }
 
-    function editUser() {
-        fetch("/edit/user", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-                },
-            body: JSON.stringify(formatvalues())
-        }).then(function (responce) {
-                return responce.text();
-        }).then(function (data) {
-                console.log(data);
-        })
-    }
-
-    function addUser() {
-        fetch("/add/user", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-                },
-            body: JSON.stringify(formatvalues())
-        }).then(function (responce) {
-                return responce.text();
-        }).then(function (data) {
-                console.log(data);
-        })
-    }
-
-    function deleteUser() {
-        fetch("/delete/user", {
+    function sendRQ(api) {
+        fetch(api, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
