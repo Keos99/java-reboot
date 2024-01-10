@@ -1,5 +1,6 @@
 package ru.edu.module12.service;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import ru.edu.module12.model.UserRepository;
 import ru.edu.module12.model.entity.UserInfo;
@@ -7,6 +8,7 @@ import ru.edu.module12.model.entity.UserInfo;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -15,12 +17,13 @@ public class UserService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+
         userRepository.saveAll(Arrays.asList(
                 new UserInfo(1L, "John Doe", 30),
                 new UserInfo(2L, "Jane Doe", 25),
                 new UserInfo(3L, "Peter Smith", 40),
                 new UserInfo(4L, "Secret Admin", 999, "admin", "123456")
-                ));
+        ));
     }
 
     public List<UserInfo> getAll() {

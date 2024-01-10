@@ -29,7 +29,6 @@ public class UserController {
     public List<UserInfo> getUsers(){
         List<UserInfo> userInfos = userService.getAll();
         logger.info(userInfos.toString());
-        logger.info("getByLogin" + userService.getUserByLogin("1").toString());
         return userInfos;
     }
 

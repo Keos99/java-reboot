@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "users")
 public class UserInfo {
@@ -79,5 +81,18 @@ public class UserInfo {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserInfo userInfo = (UserInfo) o;
+        return Objects.equals(id, userInfo.id) && Objects.equals(name, userInfo.name) && Objects.equals(age, userInfo.age) && Objects.equals(login, userInfo.login) && Objects.equals(password, userInfo.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, age, login, password);
     }
 }
