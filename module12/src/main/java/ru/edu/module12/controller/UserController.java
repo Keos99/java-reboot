@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.edu.module12.model.dto.Response;
-import ru.edu.module12.model.entity.User;
+import ru.edu.module12.model.entity.UserInfo;
 import ru.edu.module12.service.UserService;
 
 
@@ -26,17 +26,18 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> getUsers(){
-        List<User> users = userService.getAll();
-        logger.info(users.toString());
-        return users;
+    public List<UserInfo> getUsers(){
+        List<UserInfo> userInfos = userService.getAll();
+        logger.info(userInfos.toString());
+        logger.info("getByLogin" + userService.getUserByLogin("1").toString());
+        return userInfos;
     }
 
     @PostMapping("/edit/user")
-    public Response editUser(@RequestBody User user){
-        logger.info(user.toString());
+    public Response editUser(@RequestBody UserInfo userInfo){
+        logger.info(userInfo.toString());
         try {
-            userService.editUser(user);
+            userService.editUser(userInfo);
         } catch (NoSuchElementException e){
             return new Response(false, e.getMessage());
         }
@@ -44,10 +45,10 @@ public class UserController {
     }
 
     @PostMapping("/add/user")
-    public Response addUser(@RequestBody User user){
-        logger.info(user.toString());
+    public Response addUser(@RequestBody UserInfo userInfo){
+        logger.info(userInfo.toString());
         try {
-            userService.addUser(user);
+            userService.addUser(userInfo);
         } catch (IllegalArgumentException e){
             return new Response(false, e.getMessage());
         }
@@ -55,10 +56,10 @@ public class UserController {
     }
 
     @PostMapping("/delete/user")
-    public Response deleteUser(@RequestBody User user){
-        logger.info(user.toString());
+    public Response deleteUser(@RequestBody UserInfo userInfo){
+        logger.info(userInfo.toString());
         try {
-            userService.deleteUser(user);
+            userService.deleteUser(userInfo);
         } catch (NoSuchElementException e){
             return new Response(false, e.getMessage());
         }
