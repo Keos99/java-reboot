@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Operations</title>
+</head>
+<body>
+<div>
+    <h1>Users</h1>
+    <table border="1" id="usertable">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </table>
+</div>
+<br>
+<div>
+    ID пользователя: <br>
+    <input id="id"> <br>
+    Имя пользователя: <br>
+    <input id="name"> <br>
+    Возраст пользователя: <br>
+    <input id="age">
+</div>
+<br>
+<div>
+    <button id="add">Добавить пользователя</button><br><br>
+    <button id="adminbutton">Администрирование</button>
+</div>
+<script>
+    let inputid = document.getElementById("id");
+    let inputname = document.getElementById("name");
+    let inputage = document.getElementById("age");
+    let buttonadd = document.getElementById("add");
+    let buttonadmin = document.getElementById("adminbutton");
+
+    buttonadd.addEventListener("click", () => sendRQ("/add/user"));
+    buttonadmin.addEventListener("click", () => redirect("/admin"));
+
+    window.addEventListener('load', loadUserInfo)
+
+    function redirect(url) {
+        location.href = url;
+    }
+
+    function loadUserInfo() {
+        fetch("/users")
+            .then(function (responce) {
+                return responce.json();
+            })
+            .then(function (data) {
+                console.log(data)
+
+                var table = createTable(data);
+            })
+    }
+
+    function createTable(data) {
+        var table = document.getElementById("usertable");
+        for (let i = 0; i < data.length; i++) {
+            var row = table.insertRow();
+            row.insertCell().innerText = data[i].id;
+            row.insertCell().innerText = data[i].name;
+            row.insertCell().innerText = data[i].age;
+        }
+        return table;
+    }
+
+    function formatvalues() {
+        var mapuser = new Map();
+        mapuser.set('id', inputid.value);
+        mapuser.set('name', inputname.value);
+        mapuser.set('age', inputage.value);
+
+        return Object.fromEntries(mapuser);
+    }
+
+    function sendRQ(api) {
+        fetch(api, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+                },
+            body: JSON.stringify(formatvalues())
+        }).then(function (responce) {
+                return responce.text();
+        }).then(function (data) {
+                console.log(data);
+
+                alert(data);
+                location.reload();
+        })
+    }
+
+</script>
+</body>
+</html>
