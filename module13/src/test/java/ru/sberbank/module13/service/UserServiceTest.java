@@ -2,9 +2,10 @@ package ru.sberbank.module13.service;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import ru.edu.module12.model.UserRepository;
-import ru.edu.module12.model.entity.UserInfo;
-import ru.edu.module12.service.UserService;
+import ru.sberbank.edu.model.UserRepository;
+import ru.sberbank.edu.model.entity.UserInfo;
+import ru.sberbank.edu.service.UserService;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;

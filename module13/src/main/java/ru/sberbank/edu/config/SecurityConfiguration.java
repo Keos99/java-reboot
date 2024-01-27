@@ -1,4 +1,4 @@
-package ru.edu.module12.config;
+package ru.sberbank.edu.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,9 +1,10 @@
-package ru.edu.module12.service;
+package ru.sberbank.edu.service;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
-import ru.edu.module12.model.UserRepository;
-import ru.edu.module12.model.entity.UserInfo;
+import ru.sberbank.edu.model.UserRepository;
+import ru.sberbank.edu.model.entity.UserInfo;
+
 
 import java.util.Arrays;
 import java.util.List;

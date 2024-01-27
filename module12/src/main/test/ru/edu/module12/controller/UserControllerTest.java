@@ -2,7 +2,6 @@ package ru.edu.module12.controller;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.edu.module12.controller.UserController;
 import ru.edu.module12.model.dto.Response;
 import ru.edu.module12.model.entity.UserInfo;
 import ru.edu.module12.service.UserService;

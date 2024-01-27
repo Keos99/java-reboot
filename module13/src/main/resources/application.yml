@@ -1,0 +1,18 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+  docker:
+    compose:
+      enabled: false
+      file: docker-compose.yml
+  datasource:
+      url: jdbc:postgresql://localhost:5433/postgres
+      username: example
+      password: example
+  service:
+    description: service-test
+    version: 0.1

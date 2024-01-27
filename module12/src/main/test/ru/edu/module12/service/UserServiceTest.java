@@ -1,7 +1,9 @@
 package ru.edu.module12.service;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.edu.module12.model.UserRepository;
 import ru.edu.module12.model.entity.UserInfo;
 
@@ -13,6 +15,7 @@ import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
     private final UserRepository userRepositoryMock = Mockito.mock(UserRepository.class);

@@ -1,4 +1,4 @@
-package ru.edu.module12.model.entity;
+package ru.sberbank.edu.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -2,10 +2,11 @@ package ru.sberbank.module13.controller;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.edu.module12.controller.UserController;
-import ru.edu.module12.model.dto.Response;
-import ru.edu.module12.model.entity.UserInfo;
-import ru.edu.module12.service.UserService;
+import ru.sberbank.edu.controller.UserController;
+import ru.sberbank.edu.model.dto.Response;
+import ru.sberbank.edu.model.entity.UserInfo;
+import ru.sberbank.edu.service.UserService;
+
 
 import java.util.ArrayList;
 import java.util.List;

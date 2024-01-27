@@ -1,4 +1,4 @@
-package ru.edu.module12.model.dto;
+package ru.sberbank.edu.model.dto;
 
 public class Response {
     private boolean sucsess;
