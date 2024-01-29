@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD:
+  service-test:
+    container_name: service-test
+    image: service-test:latest
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
